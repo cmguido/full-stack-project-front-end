@@ -1,2 +1,17 @@
 $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 @import '~bootstrap-sass/assets/stylesheets/bootstrap';
+
+@import 'colors';
+
+body {
+  background-color: gray;
+}
+
+h1 {
+  text-align: center;
+  color: yellow;
+}
+
+nav {
+  display: inline-block;
+}
