@@ -55,11 +55,21 @@ const getNotes = function () {
     }
   })
 }
+const removeNotes = function () {
+  return $.ajax({
+    url: config.apiOrigin + '/sign-out/' + store.user.id,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
 module.exports = {
   signUp,
   signIn,
   changePassword,
   signOut,
   getNotes,
-  createNote
+  createNote,
+  removeNotes
 }

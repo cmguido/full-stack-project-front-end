@@ -9,6 +9,9 @@ aside {
   vertical-align: top;
   border: 2px dotted blue;
   word-wrap: break-word;
+  margin: 0 1.5%;
+  width: 90%;
+  height: 90%
 }
 
 body {
@@ -29,5 +32,7 @@ nav {
 
 #wrapper {
   float: right;
-  text-align: center;
+  text-align: left;
+  width: 35%;
+  height: 75%;
 }

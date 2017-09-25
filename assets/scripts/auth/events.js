@@ -48,10 +48,14 @@ const onCreateNote = function (event) {
 }
 const onGetNotes = function (event) {
   event.preventDefault()
-  const data = getFormFields(this)
-  api.getNotes(data)
+  // const data = getFormFields(this)
+  api.getNotes()
     .then(ui.getNotesSuccess)
     .catch(ui.failure)
+}
+const onClearNotes = (event) => {
+  event.preventDefault()
+  ui.clearNotes()
 }
 
 const addHandlers = function () {
@@ -66,7 +70,8 @@ const addHandlers = function () {
   $('#change-password').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
   $('#note').on('submit', onCreateNote)
-  $('#list').on('submit', onGetNotes)
+  $('#getNotesButton').on('click', onGetNotes)
+  $('#clearNotesButton').on('click', onClearNotes)
 }
 
 module.exports = {

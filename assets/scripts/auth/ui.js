@@ -46,18 +46,21 @@ const signOutSuccess = function () {
 //   console.log(data)
 const getNotesSuccess = (data) => {
   const showNotesHtml = showNotesTemplate({ notes: data.notes })
-  $('.note-listing').append(showNotesHtml)
-  // $('.remove').on('click', function () {
-  //   $(this).parent().parent().html('')
-  // })
+  $('.all-notes').append(showNotesHtml)
+  $('.remove').on('click', function () {
+    $(this).parent().parent().html('')
+  })
 }
-// }
 const createNoteSuccess = function (data) {
   console.log(data)
   console.log('Note created!')
   $('#message').text('You created a new game!')
   store.notes = data.notes
 }
+const clearNotes = () => {
+  $('.all-notes').empty()
+}
+
 // //////////////////
 
 const signUpFailure = function (data) {
@@ -93,5 +96,6 @@ module.exports = {
   signOutFailure,
   getNotesSuccess,
   createNoteSuccess,
+  clearNotes,
   failure
 }
