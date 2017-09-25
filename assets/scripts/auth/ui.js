@@ -1,5 +1,7 @@
 const store = require('../store')
+const api = require('./api')
 const showNotesTemplate = require('../templates/note-listing.handlebars')
+const getFormFields = require('../../../lib/get-form-fields')
 
 const signUpSuccess = function (data) {
   console.log(data)
@@ -17,7 +19,7 @@ const signInSuccess = function (data) {
   $('#sign-up').hide()
   $('#sign-in').hide()
   $('#sign-out').show()
-  $('#note').show()
+  $('.main').show()
   $('#content').show()
   $('.btn-default').show()
   $('.note-listing').show()
@@ -41,28 +43,50 @@ const signOutSuccess = function () {
   $('.note-listing').hide()
   $('#wrapper').hide()
 }
-// const getNotesSuccess = function (data) {
-//   store.notes = data.notes
-//   console.log(data)
+
 const getNotesSuccess = (data) => {
   const showNotesHtml = showNotesTemplate({ notes: data.notes })
   $('.all-notes').append(showNotesHtml)
   $('.remove').on('click', function () {
-    $(this).parent().parent().html('')
+    const noteId = $(this).parent().parent().data('id')
+    console.log(noteId)
+    $(this).parent().parent().remove()
+    api.removeNotes(data, noteId)
+    // $('#clearNotesButton').on('click', function () {
+    //   const noteId = $(this).parent().parent().data('id')
+    //   console.log(noteId)
+    //   $(this).parent().parent().remove()
+    //   api.removeAllNotes(data)
+  })
+  $('.edit-note').on('submit', function (event) {
+    const data = getFormFields(this)
+    event.preventDefault()
+    const noteId = $(this).parent().data('id')
+    console.log('button working ' + 'data is ' + data)
+    console.log(data)
+    api.editNotes(data, noteId)
+      .then(editNoteSuccess)
+      .catch(failure)
   })
 }
 const createNoteSuccess = function (data) {
   console.log(data)
   console.log('Note created!')
-  $('#message').text('You created a new game!')
+  $('#message').text('You created a new note!')
+  $('#note').trigger('reset')
   store.notes = data.notes
 }
-const clearNotes = () => {
-  $('.all-notes').empty()
+const editNoteSuccess = function (data) {
+  console.log(data)
+  $('#message').text('You edited a note!')
+  $('#edit-note').trigger('reset')
+  store.notes = data.notes
 }
-
+// const clearAll = () => {
+//   const noteId = $(this).parent().parent().data('id')
+//   $('.all-notes').empty(noteId)
+// }
 // //////////////////
-
 const signUpFailure = function (data) {
   console.error(data)
   $('#message').text('Issue on sign-up! Try again!')
@@ -96,6 +120,6 @@ module.exports = {
   signOutFailure,
   getNotesSuccess,
   createNoteSuccess,
-  clearNotes,
-  failure
+  failure,
+  editNoteSuccess
 }

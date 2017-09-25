@@ -53,14 +53,10 @@ const onGetNotes = function (event) {
     .then(ui.getNotesSuccess)
     .catch(ui.failure)
 }
-const onClearNotes = (event) => {
-  event.preventDefault()
-  ui.clearNotes()
-}
 
 const addHandlers = function () {
   $('#sign-out').hide()
-  $('#note').hide()
+  $('.main').hide()
   $('#wrapper').hide()
   $('#content').hide()
   $('.btn-default').hide()
@@ -71,7 +67,6 @@ const addHandlers = function () {
   $('#sign-out').on('submit', onSignOut)
   $('#note').on('submit', onCreateNote)
   $('#getNotesButton').on('click', onGetNotes)
-  $('#clearNotesButton').on('click', onClearNotes)
 }
 
 module.exports = {

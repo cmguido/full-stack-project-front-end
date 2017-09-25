@@ -55,13 +55,34 @@ const getNotes = function () {
     }
   })
 }
-const removeNotes = function () {
+const removeNotes = function (data, noteId) {
   return $.ajax({
-    url: config.apiOrigin + '/sign-out/' + store.user.id,
+    url: config.apiOrigin + '/notes/' + noteId,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token
-    }
+    },
+    data
+  })
+}
+// const removeAllNotes = function (data) {
+//   return $.ajax({
+//     url: config.apiOrigin + '/notes/',
+//     method: 'DELETE',
+//     headers: {
+//       Authorization: 'Token token=' + store.user.token
+//     },
+//     data
+//   })
+// }
+const editNotes = function (data, noteId) {
+  return $.ajax({
+    url: config.apiOrigin + '/notes/' + noteId,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data
   })
 }
 module.exports = {
@@ -71,5 +92,6 @@ module.exports = {
   signOut,
   getNotes,
   createNote,
-  removeNotes
+  removeNotes,
+  editNotes
 }

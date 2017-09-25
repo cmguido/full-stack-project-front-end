@@ -3,6 +3,14 @@
   <ul data-id="{{note.id}}">
     <li> Comment: {{note.comment}}</li>
     <li>Time: {{note.time}}</li>
-    <li><button class='remove'> remove</button></li>
+    <li><button class='remove'> Delete Note</button></li>
+    <form id="edit-note">
+      <h3>Edit older notes</h3>
+      <fieldset>
+        <input type="text" name="note[comment]" value={{note.comment}}> <br>
+        <input type="datetime" name="note[time]" value={{note.time}}> <br>
+        <input type="submit" name="submit" value="Edit Note!">
+      </fieldset>
+    </form>
   </ul>
 {{/each}}
