@@ -53,13 +53,28 @@
         </fieldset>
     </form>
 </nav>
-
-      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
-      eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-      minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex
-      ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate
-      velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat
-      cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id
-      est laborum.</p>
+<section class="main">
+<div>
+<form id="note">
+    <h3>Note It</h3>
+  <fieldset>
+    <input type="text" name="note[comment]" placeholder="Comment here"> <br>
+    <input type="datetime" name="note[time]" placeholder="Enter date"> <br>
+    <input type="submit" name="submit" value="Note it!">
+  </fieldset>
+</form>
+</div>
+</section>
+<div id="wrapper">
+  <form id="list">
+  <input type="submit" name="get-all">
+  <input type="submit" name="get-one", placeholder="Enter note ID">
+  <input type="submit" name="submit" value="Find Note!">
+  </form>
+  <aside class="note-listing">
+  <p class="all-notes">
+  </p>
+</aside>
+  </div>
     </body>
 </html>

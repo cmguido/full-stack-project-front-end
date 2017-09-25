@@ -3,6 +3,14 @@ $icon-font-path: '~bootstrap-sass/assets/fonts/bootstrap/';
 
 @import 'colors';
 
+aside {
+  float:right;
+  display:inline-block;
+  vertical-align: top;
+  border: 2px dotted blue;
+  word-wrap: break-word;
+}
+
 body {
   background-color: gray;
 }
@@ -12,6 +20,14 @@ h1 {
   color: yellow;
 }
 
+.main {
+  float: left;
+}
 nav {
   display: inline-block;
+}
+
+#wrapper {
+  float: right;
+  text-align: center;
 }

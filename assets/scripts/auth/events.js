@@ -32,14 +32,41 @@ const onSignOut = function (event) {
     .then(ui.signOutSuccess)
     .catch(ui.signOutFailure)
 }
+const onCreateNote = function (event) {
+  event.preventDefault()
+  const data = getFormFields(this)
+  console.log(data)
+  // const data = {
+  //   'note': {
+  //     'comment': $('input[name=comment]').html(),
+  //     'time': $('input[name=time]').html()
+  //   }
+  // }
+  api.createNote(data)
+    .then(ui.createNoteSuccess)
+    .catch(ui.failure)
+}
+const onGetNotes = function (event) {
+  event.preventDefault()
+  const data = getFormFields(this)
+  api.getNotes(data)
+    .then(ui.getNotesSuccess)
+    .catch(ui.failure)
+}
 
 const addHandlers = function () {
   $('#sign-out').hide()
+  $('#note').hide()
+  $('#wrapper').hide()
+  $('#content').hide()
+  $('.btn-default').hide()
   $('#change-password').hide()
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#change-password').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
+  $('#note').on('submit', onCreateNote)
+  $('#list').on('submit', onGetNotes)
 }
 
 module.exports = {
