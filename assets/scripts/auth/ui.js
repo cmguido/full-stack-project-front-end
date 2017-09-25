@@ -19,7 +19,9 @@ const signInSuccess = function (data) {
   $('#sign-up').hide()
   $('#sign-in').hide()
   $('#sign-out').show()
+  $('#change-password').show()
   $('.main').show()
+  $('#note').show()
   $('#content').show()
   $('.btn-default').show()
   $('.note-listing').show()
@@ -37,11 +39,13 @@ const signOutSuccess = function () {
   $('#message').text('You`ve successfully signed out!')
   $('#sign-up').show()
   $('#sign-in').show()
+  $('#main').hide()
   $('#note').hide()
   $('#content').hide()
   $('.btn-default').hide()
   $('.note-listing').hide()
   $('#wrapper').hide()
+  $('#change-password').hide()
 }
 
 const getNotesSuccess = (data) => {
@@ -58,12 +62,12 @@ const getNotesSuccess = (data) => {
     //   $(this).parent().parent().remove()
     //   api.removeAllNotes(data)
   })
-  $('.edit-note').on('submit', function (event) {
+  $('.edit-note').on('click', function (event) {
     const data = getFormFields(this)
     event.preventDefault()
     const noteId = $(this).parent().data('id')
-    console.log('button working ' + 'data is ' + data)
     console.log(data)
+    $(this).parent().parent().append()
     api.editNotes(data, noteId)
       .then(editNoteSuccess)
       .catch(failure)
