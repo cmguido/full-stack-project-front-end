@@ -61,6 +61,7 @@ const onCollapse = function (event) {
 
 const addHandlers = function () {
   $('#sign-out').hide()
+  $('.notes-table').hide()
   $('.main').hide()
   $('#wrapper').hide()
   $('#content').hide()

@@ -27,6 +27,7 @@ const signInSuccess = function (data) {
   $('.btn-default').show()
   $('.note-listing').show()
   $('#wrapper').show()
+  $('.all-notes').html('')
 }
 const changePasswordSuccess = function (data) {
   console.log('Great success!')
@@ -37,6 +38,7 @@ const signOutSuccess = function () {
   $('#sign-out').hide()
   store.user = null
   store.data = null
+  store.notes = null
   $('#message').text('You`ve successfully signed out!')
   $('#sign-up').show()
   $('#sign-in').show()
@@ -48,10 +50,12 @@ const signOutSuccess = function () {
   $('.note-listing').hide()
   $('#wrapper').hide()
   $('#change-password').hide()
+  $('.all-notes').html('')
 }
 
 const getNotesSuccess = (data) => {
   const showNotesHtml = showNotesTemplate({ notes: data.notes })
+  $('.notes-table').show()
   clearTable()
   $('.all-notes').append(showNotesHtml)
   $('.edit-note').on('click', onEditNote)
@@ -75,38 +79,28 @@ const onEditNote = function () {
   const time = $(this).parent().siblings()[1]
   comment.contentEditable = true
   time.contentEditable = true
-  $(comment).keydown(function (e) {
-    if (e.which === 13) {
-      comment.blur()
-    }
-  })
-  $(time).keydown(function (e) {
-    if (e.which === 13) {
-      time.blur()
-    }
-  })
   $('.remove').hide()
   $(this).parent().append('<button class="edit-note">Confirm Edit</button>')
   $(this).parent().append('<button class="edit-cancel">Cancel Edit</button>')
   $(this).hide()
-  // $('td').each(function () {
-  //   let text = $(this).html()
-  //   text = text.replace(/&amp;/g, '&')
-  //   $(this).html(text)
-  // })
-  // $('td').each(function () {
-  //   let text = $(this).html()
-  //   text = text.replace(/<br>/g, '')
-  //   $(this).html(text)
-  // })
+  $(this).hide()
   $('.edit-cancel').on('click', function () {
     clearTable()
     $('.edit-cancel').hide()
   })
   $('.edit-note').on('click', function (event) {
     onNoteEdit(noteId, comment, time)
-    // console.log(data)
-    // $(this).parent().parent().append()
+    $('td').each(function () {
+      let text = $(this).html()
+      text = text.replace(/&amp;/g, '&')
+      $(this).html(text)
+    })
+    $('td').each(function () {
+      let text = $(this).html()
+      text = text.replace(/<br>/g, '')
+      $(this).html(text)
+    })
+    $(this).parent().parent().append()
   })
 }
 
@@ -127,6 +121,7 @@ const onNoteEdit = function (noteId, comment, time) {
         time: newTime
       }
     }
+
   api.editNotes(data, noteId)
     .then(editNoteSuccess)
     .catch(failure)
@@ -147,10 +142,6 @@ const editNoteSuccess = function (data) {
     .then(getNotesSuccess)
     .catch(failure)
 }
-// const clearAll = () => {
-//   const noteId = $(this).parent().parent().data('id')
-//   $('.all-notes').empty(noteId)
-// }
 // //////////////////
 const signUpFailure = function (data) {
   console.error(data)
