@@ -1,7 +1,7 @@
 const store = require('../store')
 const api = require('./api')
 const showNotesTemplate = require('../templates/note-listing.handlebars')
-const getFormFields = require('../../../lib/get-form-fields')
+// const getFormFields = require('../../../lib/get-form-fields')
 
 const signUpSuccess = function (data) {
   console.log(data)
@@ -50,9 +50,11 @@ const signOutSuccess = function () {
 
 const getNotesSuccess = (data) => {
   const showNotesHtml = showNotesTemplate({ notes: data.notes })
+  clearTable()
   $('.all-notes').append(showNotesHtml)
+  $('.edit-note').on('click', onEditNote)
   $('.remove').on('click', function () {
-    const noteId = $(this).parent().parent().data('id')
+    const noteId = $(this).parent().parent().attr('data-id')
     console.log(noteId)
     $(this).parent().parent().remove()
     api.removeNotes(data, noteId)
@@ -62,16 +64,51 @@ const getNotesSuccess = (data) => {
     //   $(this).parent().parent().remove()
     //   api.removeAllNotes(data)
   })
-  $('.edit-note').on('click', function (event) {
-    const data = getFormFields(this)
-    event.preventDefault()
-    const noteId = $(this).parent().data('id')
-    console.log(data)
-    $(this).parent().parent().append()
-    api.editNotes(data, noteId)
-      .then(editNoteSuccess)
-      .catch(failure)
+}
+const onEditNote = function () {
+  // const data = getFormFields(this)
+  event.preventDefault()
+  const noteId = $(this).parent().parent().attr('data-id')
+  const comment = $(this).parent().siblings()[0]
+  const time = $(this).parent().siblings()[1]
+  comment.contentEditable = true
+  time.contentEditable = true
+  $(comment).keydown(function (e) {
+    if (e.which === 13) {
+      comment.blur()
+    }
   })
+  $(time).keydown(function (e) {
+    if (e.which === 13) {
+      time.blur()
+    }
+  })
+  $('.remove').hide()
+  $(this).parent().append('<button class="edit-note">Edit Note!</button>')
+  $(this).hide()
+  $('.edit-note').on('click', function (event) {
+    onNoteEdit(noteId, comment, time)
+    // console.log(data)
+    // $(this).parent().parent().append()
+  })
+}
+
+const clearTable = function () {
+  $('.all-notes').html('')
+}
+const onNoteEdit = function (noteId, comment, time) {
+  const newComment = $(comment).html()
+  const newTime = $(time).html()
+  const data =
+    {
+      note: {
+        comment: newComment,
+        time: newTime
+      }
+    }
+  api.editNotes(data, noteId)
+    .then(editNoteSuccess)
+    .catch(failure)
 }
 const createNoteSuccess = function (data) {
   console.log(data)
@@ -83,8 +120,11 @@ const createNoteSuccess = function (data) {
 const editNoteSuccess = function (data) {
   console.log(data)
   $('#message').text('You edited a note!')
-  $('#edit-note').trigger('reset')
   store.notes = data.notes
+  clearTable()
+  api.getNotes()
+    .then(getNotesSuccess)
+    .catch(failure)
 }
 // const clearAll = () => {
 //   const noteId = $(this).parent().parent().data('id')
@@ -125,5 +165,6 @@ module.exports = {
   getNotesSuccess,
   createNoteSuccess,
   failure,
-  editNoteSuccess
+  editNoteSuccess,
+  onNoteEdit
 }
