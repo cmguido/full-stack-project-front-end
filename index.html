@@ -15,7 +15,7 @@
       <h1>Note-ify</h1>
       <p class='message' id='message'></p>
       <div class="nav">
-            <h4>Sign up or Sign in</h4>
+            <h4 class="directions">Sign up or Sign in</h4>
     <nav>
       <form id="sign-up">
       <h3>Sign up!</h3>
@@ -51,25 +51,20 @@
     <input type="text" name="note[comment]" placeholder="Comment here"> <br>
     <input type="datetime" name="note[time]" placeholder="Enter date"> <br>
     <input type="submit" name="submit" value="Note it!"> <br>
-<<<<<<< HEAD
-  </fieldset>
-  <button id="getNotesButton" class="btn btn-default">Get Notes!</button>
-    <!-- <button id="clearNotesButton" class="btn btn-default">Clear Notes!</button> -->>
-=======
     <!-- <button id="clearNotesButton" class="btn btn-default">Clear Notes!</button> -->
->>>>>>> development
+    <!-- <button id="clearNotesButton" class="btn btn-default">Clear Notes!</button> -->
 </form>
 <br>
 </div>
 </section>
 <div id="wrapper">
-  <button id="getNotesButton" class="btn btn-default">Get Notes!</button>
   <!-- <form id="list">
   <input type="submit" name="get-all">
   <input type="submit" name="get-one", placeholder="Enter note ID">
   <input type="submit" name="submit" value="Find Note!">
   </form> -->
   <aside class="note-listing">
+    <button id="getNotesButton" class="btn btn-default">Get Notes!</button>
   <table class="notes-table">
     <thead>
     <tr>

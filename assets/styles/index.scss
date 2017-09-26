@@ -7,7 +7,8 @@ aside {
   float:right;
   display:inline-block;
   vertical-align: top;
-  border: 2px dotted blue;
+  border: 3px white;
+  background-color: yellow;
   word-wrap: break-word;
   margin: 0 1.5%;
   width: 90%;
@@ -27,42 +28,74 @@ h3 {
   text-align: center;
   color: yellow;
   height: 25px;
+  padding: 0 4px;
+  margin: auto;
 }
 
 h4 {
   text-align: center;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: center;
+  align-content: center;
 }
 
 form {
-  float: left;
+      float: left;
       display: block;
+      align-content: center;
       height: 70px;
       color: black;
       text-align: center;
       padding: 14px 16px;
       text-decoration: none;
       font-size: 17px;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-wrap: wrap;
+      flex-wrap: wrap;
+      -webkit-align-content: center;
+      align-content: center;
 }
 
 .main {
+  clear: both;
+  margin: 70px;
 }
 .nav {
   display: inline-block;
-  width: 95%;
-  height: 100px;
+  width: 100%;
+  height: 70px;
   vertical-align: middle;
   float: left;
   clear:left;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -webkit-align-content: center;
+  align-content: center;
 }
 
 td {
-  padding: 0 auto;
+  padding: 5px;
+  margin: auto 2px;
+  border: 15px black;
+  font-size: 20px;
 
 }
 
 #wrapper {
   float: right;
+  clear: left;
   text-align: left;
   width: 65%;
   height: 75%;
+  margin: 10px;
+}
+
+.btn btn-default {
+  text-align: center;
 }

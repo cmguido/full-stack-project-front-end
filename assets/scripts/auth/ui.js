@@ -18,6 +18,7 @@ const signInSuccess = function (data) {
   $('#sign-in').trigger('reset')
   $('#sign-up').hide()
   $('#sign-in').hide()
+  $('.directions').hide()
   $('#sign-out').show()
   $('#change-password').show()
   $('.main').show()
@@ -39,6 +40,7 @@ const signOutSuccess = function () {
   $('#message').text('You`ve successfully signed out!')
   $('#sign-up').show()
   $('#sign-in').show()
+  $('.directions').show()
   $('#main').hide()
   $('#note').hide()
   $('#content').hide()
@@ -84,7 +86,7 @@ const onEditNote = function () {
     }
   })
   $('.remove').hide()
-  $(this).parent().append('<button class="edit-note">Edit Note!</button>')
+  $(this).parent().append('<button class="edit-note">Confirm Edit</button>')
   $(this).hide()
   $('.edit-note').on('click', function (event) {
     onNoteEdit(noteId, comment, time)
