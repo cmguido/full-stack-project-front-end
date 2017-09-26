@@ -87,7 +87,22 @@ const onEditNote = function () {
   })
   $('.remove').hide()
   $(this).parent().append('<button class="edit-note">Confirm Edit</button>')
+  $(this).parent().append('<button class="edit-cancel">Cancel Edit</button>')
   $(this).hide()
+  // $('td').each(function () {
+  //   let text = $(this).html()
+  //   text = text.replace(/&amp;/g, '&')
+  //   $(this).html(text)
+  // })
+  // $('td').each(function () {
+  //   let text = $(this).html()
+  //   text = text.replace(/<br>/g, '')
+  //   $(this).html(text)
+  // })
+  $('.edit-cancel').on('click', function () {
+    clearTable()
+    $('.edit-cancel').hide()
+  })
   $('.edit-note').on('click', function (event) {
     onNoteEdit(noteId, comment, time)
     // console.log(data)
@@ -97,6 +112,10 @@ const onEditNote = function () {
 
 const clearTable = function () {
   $('.all-notes').html('')
+}
+
+const collapseTable = function () {
+  clearTable()
 }
 const onNoteEdit = function (noteId, comment, time) {
   const newComment = $(comment).html()
@@ -168,5 +187,6 @@ module.exports = {
   createNoteSuccess,
   failure,
   editNoteSuccess,
-  onNoteEdit
+  onNoteEdit,
+  collapseTable
 }

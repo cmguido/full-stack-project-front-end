@@ -54,6 +54,11 @@ const onGetNotes = function (event) {
     .catch(ui.failure)
 }
 
+const onCollapse = function (event) {
+  event.preventDefault()
+  ui.collapseTable()
+}
+
 const addHandlers = function () {
   $('#sign-out').hide()
   $('.main').hide()
@@ -61,12 +66,14 @@ const addHandlers = function () {
   $('#content').hide()
   $('.btn-default').hide()
   $('#change-password').hide()
+  $('.edit-cancel').hide()
   $('#sign-up').on('submit', onSignUp)
   $('#sign-in').on('submit', onSignIn)
   $('#change-password').on('submit', onChangePassword)
   $('#sign-out').on('submit', onSignOut)
   $('#note').on('submit', onCreateNote)
   $('#getNotesButton').on('click', onGetNotes)
+  $('#collapseNotesButton').on('click', onCollapse)
 }
 
 module.exports = {
