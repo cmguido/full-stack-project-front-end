@@ -14,69 +14,72 @@
     <body class="container-fluid">
       <h1>Note-ify</h1>
       <p class='message' id='message'></p>
-
-      <nav>
+      <div class="nav">
+            <h4>Sign up or Sign in</h4>
+    <nav>
       <form id="sign-up">
-    <fieldset>
-      <legend>Sign up!</legend>
+      <h3>Sign up!</h3>
       <input type="text" name="credentials[email]" placeholder="Enter Email">
       <input type="password" name="credentials[password]" placeholder="Enter Password">
       <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
       <input type="submit" name="submit" value="Sign up!">
-    </fieldset>
-
-    <h4>OR</h4>
-
   </form>
   <form id="sign-in">
-    <fieldset>
-      <legend>Sign In!</legend>
+      <h3>Sign In!</h3>
       <input type="text" name="credentials[email]" placeholder="Enter Email">
       <input type="password" name="credentials[password]" placeholder="Enter Password">
       <input type="submit" name="submit" value="Sign in!">
-    </fieldset>
   </form>
 
   <form id="change-password">
-  <fieldset>
-      <legend>Change Password</legend>
+      <h3>Change Password</h3>
         <input type="password" name="passwords[old]" placeholder="Enter Old Password">
         <input type="password" name="passwords[new]" placeholder="Enter New Password">
       <input type="submit" name="submit" value="Change Password!">
-  </fieldset>
 
     </form>
     <form id="sign-out">
-      <fieldset>
-        <legend>Sign Out</legend>
+        <h3>Sign Out</h3>
         <input type="submit" name="submit" value="Sign Out!">
-        </fieldset>
     </form>
 </nav>
+</div>
 <section class="main">
 <div>
 <form id="note">
     <h3>Note It</h3>
-  <fieldset>
     <input type="text" name="note[comment]" placeholder="Comment here"> <br>
     <input type="datetime" name="note[time]" placeholder="Enter date"> <br>
     <input type="submit" name="submit" value="Note it!"> <br>
+<<<<<<< HEAD
   </fieldset>
   <button id="getNotesButton" class="btn btn-default">Get Notes!</button>
     <!-- <button id="clearNotesButton" class="btn btn-default">Clear Notes!</button> -->>
+=======
+    <!-- <button id="clearNotesButton" class="btn btn-default">Clear Notes!</button> -->
+>>>>>>> development
 </form>
 <br>
 </div>
 </section>
 <div id="wrapper">
+  <button id="getNotesButton" class="btn btn-default">Get Notes!</button>
   <!-- <form id="list">
   <input type="submit" name="get-all">
   <input type="submit" name="get-one", placeholder="Enter note ID">
   <input type="submit" name="submit" value="Find Note!">
   </form> -->
   <aside class="note-listing">
-  <p class="all-notes">
-  </p>
+  <table class="notes-table">
+    <thead>
+    <tr>
+      <th>Comment</th>
+      <th>Time</th>
+      <tbody class="all-notes">
+      </tbody>
+    </tr>
+      </thead>
+  </table>
 </aside>
   </div>
     </body>

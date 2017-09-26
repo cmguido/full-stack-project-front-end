@@ -23,21 +23,46 @@ h1 {
   color: yellow;
 }
 
-.main {
-  float: left;
+h3 {
+  text-align: center;
+  color: yellow;
+  height: 25px;
 }
-nav {
+
+h4 {
+  text-align: center;
+}
+
+form {
+  float: left;
+      display: block;
+      height: 70px;
+      color: black;
+      text-align: center;
+      padding: 14px 16px;
+      text-decoration: none;
+      font-size: 17px;
+}
+
+.main {
+}
+.nav {
   display: inline-block;
-  width: 90%;
-  height: 20%;
+  width: 95%;
+  height: 100px;
   vertical-align: middle;
   float: left;
-  clear:both;
+  clear:left;
+}
+
+td {
+  padding: 0 auto;
+
 }
 
 #wrapper {
   float: right;
   text-align: left;
-  width: 35%;
+  width: 65%;
   height: 75%;
 }

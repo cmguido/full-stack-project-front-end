@@ -1,13 +1,16 @@
 {{#each notes as |note|}}
 
-  <ul data-id="{{note.id}}">
-    <li> Comment: {{note.comment}}</li>
-    <li>Time: {{note.time}}</li>
-    <li><button class='remove'> Delete Note</button></li>
-    <form class="form-inline edit-note">
+  <tr data-id="{{note.id}}">
+    <td class="comment">{{note.comment}}</td>
+    <td class="time">{{note.time}}</td>
+    <td>
+    <button class="remove"> Delete Note</button>
+    <button class="edit-note">Edit Note!</button>
+  </td>
+    <!-- <form class="form-inline edit-note">
         <input type="text" name="note[comment]" value={{note.comment}}> <br>
         <input type="datetime" name="note[time]" value={{note.time}}> <br>
         <li><button class='edit-note'>Edit Note!</button></li>
-      </form>
-  </ul>
+      </form> -->
+  </tr>
 {{/each}}
