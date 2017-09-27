@@ -44,14 +44,14 @@ const onCreateNote = function (event) {
   // }
   api.createNote(data)
     .then(ui.createNoteSuccess)
-    .catch(ui.failure)
+    .catch(ui.createNoteFailure)
 }
 const onGetNotes = function (event) {
   event.preventDefault()
   // const data = getFormFields(this)
   api.getNotes()
     .then(ui.getNotesSuccess)
-    .catch(ui.failure)
+    .catch(ui.getNoteFailure)
 }
 
 const onCollapse = function (event) {

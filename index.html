@@ -13,9 +13,9 @@
     </head>
     <body class="container-fluid">
       <h1>Note-ify</h1>
-      <p class='message' id='message'></p>
   <div class="nav">
     <nav>
+            <p class='message' id='message'></p>
       <form id="sign-up">
       <h5>Sign up!</h5>
       <input type="text" name="credentials[email]" placeholder="Enter Email">
@@ -56,11 +56,11 @@
 </div>
   <h4 class="directions">Sign up or Sign in</h4>
 <section class="main">
-<div>
+<div class="note-input">
 <form id="note">
     <h3>Note It</h3>
-    <input type="text" name="note[comment]" placeholder="Comment here"> <br>
-    <input type="datetime" name="note[time]" placeholder="Enter date"> <br>
+    <textarea rows="1" class="comment-input" type="text" name="note[comment]" style="width:150px; height:50px;" placeholder="Comment here"></textarea><br>
+    <input type="datetime" name="note[time]" style="width:150px;" placeholder="Enter date"> <br>
     <input type="reset"> <br>
     <input type="submit" name="submit" value="Note it!"> <br>
     <!-- <button id="clearNotesButton" class="btn btn-default">Clear Notes!</button> -->

@@ -6,15 +6,16 @@ const showNotesTemplate = require('../templates/note-listing.handlebars')
 const signUpSuccess = function (data) {
   console.log(data)
   console.log('Successfully signed up!')
-  $('#message').text('Successfully signed up')
+  $('#message').text('Successfully signed up').fadeIn().delay(8000).fadeOut()
   $('#sign-up').trigger('reset')
+  $('#sign-in').trigger('reset')
   $('#sign-up').hide()
 }
 const signInSuccess = function (data) {
   console.log(data)
   console.log('Successfully signed in!')
   store.user = data.user
-  $('#message').text('You`re signed in!')
+  $('#message').text('You`re signed in!').fadeIn().delay(8000).fadeOut()
   $('#sign-in').trigger('reset')
   $('#sign-up').hide()
   $('#sign-in').hide()
@@ -32,14 +33,14 @@ const signInSuccess = function (data) {
 const changePasswordSuccess = function (data) {
   console.log('Great success!')
   $('#change-password').trigger('reset')
-  $('#message').text('You`ve successfully changed your password!')
+  $('#message').text('You`ve successfully changed your password!').fadeIn().delay(8000).fadeOut()
 }
 const signOutSuccess = function () {
   $('#sign-out').hide()
   store.user = null
   store.data = null
   store.notes = null
-  $('#message').text('You`ve successfully signed out!')
+  $('#message').text('You`ve successfully signed out!').fadeIn().delay(8000).fadeOut()
   $('#sign-up').show()
   $('#sign-in').show()
   $('.directions').show()
@@ -54,22 +55,27 @@ const signOutSuccess = function () {
 }
 
 const getNotesSuccess = (data) => {
-  const showNotesHtml = showNotesTemplate({ notes: data.notes })
-  $('.notes-table').show()
-  clearTable()
-  $('.all-notes').append(showNotesHtml)
-  $('.edit-note').on('click', onEditNote)
-  $('.remove').on('click', function () {
-    const noteId = $(this).parent().parent().attr('data-id')
-    console.log(noteId)
-    $(this).parent().parent().remove()
-    api.removeNotes(data, noteId)
+  if (data.notes !== '') {
+    $('#message').text('Got em!').fadeIn().delay(8000).fadeOut()
+    const showNotesHtml = showNotesTemplate({ notes: data.notes })
+    $('.notes-table').show()
+    clearTable()
+    $('.all-notes').append(showNotesHtml)
+    $('.edit-note').on('click', onEditNote)
+    $('.remove').on('click', function () {
+      const noteId = $(this).parent().parent().attr('data-id')
+      console.log(noteId)
+      $(this).parent().parent().remove()
+      api.removeNotes(data, noteId)
     // $('#clearNotesButton').on('click', function () {
     //   const noteId = $(this).parent().parent().data('id')
     //   console.log(noteId)
     //   $(this).parent().parent().remove()
     //   api.removeAllNotes(data)
-  })
+    })
+  } else {
+    getNoteFailure()
+  }
 }
 const onEditNote = function () {
   // const data = getFormFields(this)
@@ -129,13 +135,13 @@ const onNoteEdit = function (noteId, comment, time) {
 const createNoteSuccess = function (data) {
   console.log(data)
   console.log('Note created!')
-  $('#message').text('You created a new note!')
+  $('#message').text('You created a new note!').fadeIn().delay(8000).fadeOut()
   $('#note').trigger('reset')
   store.notes = data.notes
 }
 const editNoteSuccess = function (data) {
   console.log(data)
-  $('#message').text('You edited a note!')
+  $('#message').text('You edited a note!').fadeIn().delay(8000).fadeOut()
   store.notes = data.notes
   clearTable()
   api.getNotes()
@@ -145,7 +151,7 @@ const editNoteSuccess = function (data) {
 // //////////////////
 const signUpFailure = function (data) {
   console.error(data)
-  $('#message').text('Issue on sign-up! Try again!')
+  $('#message').text('Issue on sign-up! Try again!').fadeIn().delay(8000).fadeOut()
 }
 const signInFailure = function (data) {
   console.log(data)
@@ -155,15 +161,24 @@ const signInFailure = function (data) {
 const changePasswordFailure = function (data) {
   console.log(data)
   console.log('FAIL!')
-  $('#message').text('Something went wrong, change password!')
+  $('#message').text('Something went wrong, change password!').fadeIn().delay(8000).fadeOut()
 }
 const signOutFailure = function (data) {
   console.log(data)
   console.log('FAIL!')
-  $('#message').text('You have not signed out!')
+  $('#message').text('You have not signed out!').fadeIn().delay(8000).fadeOut()
 }
 const failure = (data) => {
   console.error(data)
+}
+const createNoteFailure = function (data) {
+  console.log(data)
+  $('#message').text('Please fill out comment!').fadeIn().delay(8000).fadeOut()
+  $('#note').trigger('reset')
+}
+const getNoteFailure = function (data) {
+  console.log(data)
+  $('#message').text('Got nothin, make a note!').fadeIn().delay(8000).fadeOut()
 }
 module.exports = {
   signUpSuccess,
@@ -175,7 +190,9 @@ module.exports = {
   signOutSuccess,
   signOutFailure,
   getNotesSuccess,
+  getNoteFailure,
   createNoteSuccess,
+  createNoteFailure,
   failure,
   editNoteSuccess,
   onNoteEdit,

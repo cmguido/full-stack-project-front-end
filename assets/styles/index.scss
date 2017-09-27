@@ -14,6 +14,23 @@ aside {
   width: 90%;
   height: 90%
 }
+.comment-input {
+    word-wrap: break-word;
+    word-break: break-word;
+    height: 30px;
+    width: 120px;
+}
+
+#message{
+  z-index: 0;
+  width: 15%;
+  display: inline-flex;
+  margin: 0 auto;
+  height: 10;
+  align-self: flex-start;
+  color: white;
+  font-weight: bold;
+}
 
 body {
   background-color: gray;
@@ -23,12 +40,14 @@ body {
   flex-wrap: wrap;
   -webkit-align-content: center;
   align-content: center;
+  z-index: 1;
 }
 
 h1 {
   color: yellow;
   align-content: center;
   float: left;
+  margin: 0 3px;
 }
 
 h5 {
@@ -55,22 +74,21 @@ form {
       text-decoration: none;
       font-size: 10px;
 }
-.menu-drop {
-  float: right;
-  clearfix: both;
-  font-size: 15px;
-  position: absolute;
-  align-content: right;
 
-
-}
 .main {
   clear: both;
   margin: 70px;
+  border-right-style: ridge;
+  border-width: thin;
+  border: white;
 }
 
 #note {
   float: left;
+  font-size: 14px;
+  border-right-style: ridge;
+  border-width: thin;
+  border: white;
 }
 .nav {
   display: inline-block;
