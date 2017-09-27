@@ -15,6 +15,7 @@ const signInSuccess = function (data) {
   console.log(data)
   console.log('Successfully signed in!')
   store.user = data.user
+  $('#collapseNotesButton').hide()
   $('#message').text('You`re signed in!').fadeIn().delay(8000).fadeOut()
   $('#sign-in').trigger('reset')
   $('#sign-up').hide()
@@ -25,7 +26,7 @@ const signInSuccess = function (data) {
   $('.main').show()
   $('#note').show()
   $('#content').show()
-  $('.btn-default').show()
+  $('#getNotesButton').show()
   $('.note-listing').show()
   $('#wrapper').show()
   $('.all-notes').html('')
@@ -59,6 +60,7 @@ const getNotesSuccess = (data) => {
     $('#message').text('Got em!').fadeIn().delay(8000).fadeOut()
     const showNotesHtml = showNotesTemplate({ notes: data.notes })
     $('.notes-table').show()
+    $('#collapseNotesButton').show()
     clearTable()
     $('.all-notes').append(showNotesHtml)
     $('.edit-note').on('click', onEditNote)
@@ -93,6 +95,7 @@ const onEditNote = function () {
   $('.edit-cancel').on('click', function () {
     clearTable()
     $('.edit-cancel').hide()
+    $('#collapseNotesButton').hide()
   })
   $('.edit-note').on('click', function (event) {
     onNoteEdit(noteId, comment, time)
@@ -116,6 +119,7 @@ const clearTable = function () {
 
 const collapseTable = function () {
   clearTable()
+  $('#collapseNotesButton').hide()
 }
 const onNoteEdit = function (noteId, comment, time) {
   const newComment = $(comment).html()
@@ -137,7 +141,7 @@ const createNoteSuccess = function (data) {
   console.log('Note created!')
   $('#message').text('You created a new note!').fadeIn().delay(8000).fadeOut()
   $('#note').trigger('reset')
-  store.notes = data.notes
+  // store.notes = data.notes
 }
 const editNoteSuccess = function (data) {
   console.log(data)
