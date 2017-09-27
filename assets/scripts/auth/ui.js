@@ -95,6 +95,7 @@ const onEditNote = function () {
   $('.edit-cancel').on('click', function () {
     clearTable()
     $('.edit-cancel').hide()
+    $('#collapseNotesButton').hide()
   })
   $('.edit-note').on('click', function (event) {
     onNoteEdit(noteId, comment, time)
@@ -140,7 +141,7 @@ const createNoteSuccess = function (data) {
   console.log('Note created!')
   $('#message').text('You created a new note!').fadeIn().delay(8000).fadeOut()
   $('#note').trigger('reset')
-  store.notes = data.notes
+  // store.notes = data.notes
 }
 const editNoteSuccess = function (data) {
   console.log(data)
