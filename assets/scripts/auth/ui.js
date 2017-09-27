@@ -6,7 +6,7 @@ const showNotesTemplate = require('../templates/note-listing.handlebars')
 const signUpSuccess = function (data) {
   console.log(data)
   console.log('Successfully signed up!')
-  $('#message').text('Successfully signed up').fadeIn().delay(8000).fadeOut()
+  $('#message').text('Successfully signed up').fadeIn().delay(4000).fadeOut()
   $('#sign-up').trigger('reset')
   $('#sign-in').trigger('reset')
   $('#sign-up').hide()
@@ -16,7 +16,7 @@ const signInSuccess = function (data) {
   console.log('Successfully signed in!')
   store.user = data.user
   $('#collapseNotesButton').hide()
-  $('#message').text('You`re signed in!').fadeIn().delay(8000).fadeOut()
+  $('#message').text('You`re signed in!').fadeIn().delay(4000).fadeOut()
   $('#sign-in').trigger('reset')
   $('#sign-up').hide()
   $('#sign-in').hide()
@@ -34,14 +34,14 @@ const signInSuccess = function (data) {
 const changePasswordSuccess = function (data) {
   console.log('Great success!')
   $('#change-password').trigger('reset')
-  $('#message').text('You`ve successfully changed your password!').fadeIn().delay(8000).fadeOut()
+  $('#message').text('You`ve successfully changed your password!').fadeIn().delay(4000).fadeOut()
 }
 const signOutSuccess = function () {
   $('#sign-out').hide()
   store.user = null
   store.data = null
   store.notes = null
-  $('#message').text('You`ve successfully signed out!').fadeIn().delay(8000).fadeOut()
+  $('#message').text('You`ve successfully signed out!').fadeIn().delay(4000).fadeOut()
   $('#sign-up').show()
   $('#sign-in').show()
   $('.directions').show()
@@ -57,10 +57,24 @@ const signOutSuccess = function () {
 
 const getNotesSuccess = (data) => {
   if (data.notes !== '') {
+    // console.log('data notes is ' + data.notes.length)
     $('#message').text('Got em!').fadeIn().delay(8000).fadeOut()
     const showNotesHtml = showNotesTemplate({ notes: data.notes })
     $('.notes-table').show()
-    $('#collapseNotesButton').show()
+    // if ($('.all-notes').val() === '') {
+    //   $('.all-notes').show()
+    // }
+    if (data.notes.length === 0) {
+      $('#collapseNotesButton').hide()
+    } else {
+      $('#collapseNotesButton').show()
+    }
+    // $('#collapseNotesButton').show()
+    // if ($('.all-notes').val() !== '') {
+    //   $('#collapseNotesButton').show()
+    // } else {
+    // $('#collapseNotesButton').hide()
+    // }
     clearTable()
     $('.all-notes').append(showNotesHtml)
     $('.edit-note').on('click', onEditNote)
@@ -78,6 +92,11 @@ const getNotesSuccess = (data) => {
   } else {
     getNoteFailure()
   }
+  if (data.notes.length === 0) {
+    $('#collapseNotesButton').hide()
+  } else {
+    $('#collapseNotesButton').show()
+  }
 }
 const onEditNote = function () {
   // const data = getFormFields(this)
@@ -93,9 +112,12 @@ const onEditNote = function () {
   $(this).hide()
   $(this).hide()
   $('.edit-cancel').on('click', function () {
-    clearTable()
+    // clearTable()
+    $(this).parent().parent().append()
     $('.edit-cancel').hide()
-    $('#collapseNotesButton').hide()
+    // $('#collapseNotesButton').hide()
+    api.getNotes()
+      .then(getNotesSuccess)
   })
   $('.edit-note').on('click', function (event) {
     onNoteEdit(noteId, comment, time)
@@ -110,6 +132,9 @@ const onEditNote = function () {
       $(this).html(text)
     })
     $(this).parent().parent().append()
+    if ($('.all-notes').val() === 0) {
+      $('#collapseNotesButton').hide()
+    }
   })
 }
 
@@ -121,6 +146,14 @@ const collapseTable = function () {
   clearTable()
   $('#collapseNotesButton').hide()
 }
+// const checkIfEmpty = function (data) {
+//   if (data.notes.length === 0) {
+//     $('#collapseNotesButton').hide()
+//   } else {
+//     $('#collapseNotesButton').show()
+//   }
+// }
+
 const onNoteEdit = function (noteId, comment, time) {
   const newComment = $(comment).html()
   const newTime = $(time).html()
@@ -139,14 +172,14 @@ const onNoteEdit = function (noteId, comment, time) {
 const createNoteSuccess = function (data) {
   console.log(data)
   console.log('Note created!')
-  $('#message').text('You created a new note!').fadeIn().delay(8000).fadeOut()
+  $('#message').text('You created a new note!').fadeIn().delay(4000).fadeOut()
   $('#note').trigger('reset')
   // store.notes = data.notes
 }
 const editNoteSuccess = function (data) {
   console.log(data)
-  $('#message').text('You edited a note!').fadeIn().delay(8000).fadeOut()
-  store.notes = data.notes
+  $('#message').text('You edited a note!').fadeIn().delay(4000).fadeOut()
+  // store.notes = data.notes
   clearTable()
   api.getNotes()
     .then(getNotesSuccess)
@@ -155,7 +188,7 @@ const editNoteSuccess = function (data) {
 // //////////////////
 const signUpFailure = function (data) {
   console.error(data)
-  $('#message').text('Issue on sign-up! Try again!').fadeIn().delay(8000).fadeOut()
+  $('#message').text('Issue on sign-up! Try again!').fadeIn().delay(4000).fadeOut()
 }
 const signInFailure = function (data) {
   console.log(data)
@@ -165,24 +198,24 @@ const signInFailure = function (data) {
 const changePasswordFailure = function (data) {
   console.log(data)
   console.log('FAIL!')
-  $('#message').text('Something went wrong, change password!').fadeIn().delay(8000).fadeOut()
+  $('#message').text('Something went wrong, change password!').fadeIn().delay(4000).fadeOut()
 }
 const signOutFailure = function (data) {
   console.log(data)
   console.log('FAIL!')
-  $('#message').text('You have not signed out!').fadeIn().delay(8000).fadeOut()
+  $('#message').text('You have not signed out!').fadeIn().delay(4000).fadeOut()
 }
 const failure = (data) => {
   console.error(data)
 }
 const createNoteFailure = function (data) {
   console.log(data)
-  $('#message').text('Please fill out comment!').fadeIn().delay(8000).fadeOut()
+  $('#message').text('Please fill out comment!').fadeIn().delay(4000).fadeOut()
   $('#note').trigger('reset')
 }
 const getNoteFailure = function (data) {
   console.log(data)
-  $('#message').text('Got nothin, make a note!').fadeIn().delay(8000).fadeOut()
+  $('#message').text('Got nothin, make a note!').fadeIn().delay(4000).fadeOut()
 }
 module.exports = {
   signUpSuccess,
