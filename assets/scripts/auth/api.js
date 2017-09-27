@@ -85,6 +85,7 @@ const editNotes = function (data, noteId) {
     data
   })
 }
+
 module.exports = {
   signUp,
   signIn,
