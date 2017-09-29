@@ -118,6 +118,7 @@ const onEditNote = function () {
     // $('#collapseNotesButton').hide()
     api.getNotes()
       .then(getNotesSuccess)
+      .then(checkGet)
   })
   $('.edit-note').on('click', function (event) {
     onNoteEdit(noteId, comment, time)
@@ -217,6 +218,13 @@ const getNoteFailure = function (data) {
   // console.log(data)
   $('#message').text('Got nothin, make a note!').fadeIn().delay(4000).fadeOut()
 }
+const checkGet = function (data) {
+  if (data.notes.length === 0) {
+    $('#getNotesButton').hide()
+  } else {
+    $('#getNotesButton').show()
+  }
+}
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -233,5 +241,6 @@ module.exports = {
   failure,
   editNoteSuccess,
   onNoteEdit,
-  collapseTable
+  collapseTable,
+  checkGet
 }
