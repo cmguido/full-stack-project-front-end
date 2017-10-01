@@ -31,7 +31,6 @@ const signInSuccess = function (data) {
   $('.note-listing').show()
   $('#wrapper').show()
   $('.all-notes').html('')
-  checkGet(data.notes)
 }
 const changePasswordSuccess = function (data) {
   // console.log('Great success!')
