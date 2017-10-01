@@ -21,6 +21,7 @@ const signInSuccess = function (data) {
   $('#sign-up').hide()
   $('#sign-in').hide()
   $('.directions').hide()
+  $('#edit-info').hide()
   $('#sign-out').show()
   $('#change-password').show()
   $('.main').show()
@@ -30,6 +31,7 @@ const signInSuccess = function (data) {
   $('.note-listing').show()
   $('#wrapper').show()
   $('.all-notes').html('')
+  checkGet(data.notes)
 }
 const changePasswordSuccess = function (data) {
   // console.log('Great success!')
@@ -91,6 +93,7 @@ const getNotesSuccess = (data) => {
     })
   } else {
     getNoteFailure()
+    checkGet()
   }
   if (data.notes.length === 0) {
     $('#collapseNotesButton').hide()
@@ -101,6 +104,7 @@ const getNotesSuccess = (data) => {
 const onEditNote = function () {
   // const data = getFormFields(this)
   event.preventDefault()
+  $('#edit-info').show().fadeIn().delay(4000).fadeOut()
   const noteId = $(this).parent().parent().attr('data-id')
   const comment = $(this).parent().siblings()[0]
   const time = $(this).parent().siblings()[1]
@@ -112,13 +116,13 @@ const onEditNote = function () {
   $(this).hide()
   $(this).hide()
   $('.edit-cancel').on('click', function () {
+    $('#edit-info').hide()
     // clearTable()
     $(this).parent().parent().append()
     $('.edit-cancel').hide()
     // $('#collapseNotesButton').hide()
     api.getNotes()
       .then(getNotesSuccess)
-      .then(checkGet)
   })
   $('.edit-note').on('click', function (event) {
     onNoteEdit(noteId, comment, time)
@@ -156,6 +160,7 @@ const collapseTable = function () {
 // }
 
 const onNoteEdit = function (noteId, comment, time) {
+  $('#edit-info').hide()
   const newComment = $(comment).html()
   const newTime = $(time).html()
   const data =
@@ -181,7 +186,7 @@ const editNoteSuccess = function (data) {
   // console.log(data)
   $('#message').text('You edited a note!').fadeIn().delay(4000).fadeOut()
   // store.notes = data.notes
-  clearTable()
+  // clearTable()
   api.getNotes()
     .then(getNotesSuccess)
     .catch(failure)
@@ -221,6 +226,7 @@ const getNoteFailure = function (data) {
 const checkGet = function (data) {
   if (data.notes.length === 0) {
     $('#getNotesButton').hide()
+    $('#message').text('Got nothin, make a note!').fadeIn().delay(4000).fadeOut()
   } else {
     $('#getNotesButton').show()
   }
