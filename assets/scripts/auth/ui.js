@@ -92,7 +92,6 @@ const getNotesSuccess = (data) => {
     })
   } else {
     getNoteFailure()
-    checkGet()
   }
   if (data.notes.length === 0) {
     $('#collapseNotesButton').hide()
@@ -103,7 +102,7 @@ const getNotesSuccess = (data) => {
 const onEditNote = function () {
   // const data = getFormFields(this)
   event.preventDefault()
-  $('#edit-info').show().fadeIn().delay(4000).fadeOut()
+  $('#edit-info').show()
   const noteId = $(this).parent().parent().attr('data-id')
   const comment = $(this).parent().siblings()[0]
   const time = $(this).parent().siblings()[1]
