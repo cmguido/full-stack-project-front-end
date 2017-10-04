@@ -61,7 +61,7 @@ const signOutSuccess = function () {
   $('#note').hide()
   $('#content').hide()
   $('.btn-default').hide()
-  // $('.note-listing').hide()
+  $('.note-listing').hide()
   $('#wrapper').hide()
   $('#change-password').hide()
   $('.all-notes').html('')

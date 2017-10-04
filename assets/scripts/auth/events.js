@@ -64,9 +64,11 @@ const checkGet = function (data) {
   if (data.notes.length === 0) {
     $('#collapseNotesButton').hide()
     $('#getNotesButton').hide()
+    $('.note-listing').hide()
   } else {
     $('#collapseNotesButton').show()
     $('#getNotesButton').show()
+    $('.note-listing').show()
   }
 }
 const addHandlers = function () {
