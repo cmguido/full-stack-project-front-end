@@ -86,8 +86,6 @@ const addHandlers = function () {
   $('#note').on('submit', onCreateNote)
   $('#getNotesButton').on('click', onGetNotes)
   $('#collapseNotesButton').on('click', onCollapse)
-  // $('#sign-in').on('submit', onGetNotes)
-  // $('#sign-in').on('submit', checkGet)
 }
 
 module.exports = {

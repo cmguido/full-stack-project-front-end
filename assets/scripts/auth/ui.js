@@ -29,7 +29,7 @@ const signInSuccess = function (data) {
   $('#note').show()
   $('#content').show()
   // $('#getNotesButton').show()
-  $('.note-listing').show()
+  // $('.note-listing').show()
   $('#wrapper').show()
   $('.all-notes').html('')
   // $('#sign-in').on('click', function (data) {
@@ -61,28 +61,24 @@ const signOutSuccess = function () {
   $('#note').hide()
   $('#content').hide()
   $('.btn-default').hide()
-  $('.note-listing').hide()
+  // $('.note-listing').hide()
   $('#wrapper').hide()
   $('#change-password').hide()
   $('.all-notes').html('')
 }
 
 const getNotesSuccess = (data) => {
-  if (data.notes !== '') {
-    // console.log('data notes is ' + data.notes.length)
+  // console.log('data notes is ' + data)
+  if (data.notes.length !== 0) {
     // $('#message').text('Got em!').fadeIn().delay(8000).fadeOut()
     const showNotesHtml = showNotesTemplate({ notes: data.notes })
     $('.notes-table').show()
+    $('#collapseNotesButton').show()
+    $('#getNotesButton').show()
+    $('.note-listing').show()
     // if ($('.all-notes').val() === '') {
     //   $('.all-notes').show()
     // }
-    if (data.notes.length === 0) {
-      $('#collapseNotesButton').hide()
-      $('#getNotesButton').hide()
-    } else {
-      $('#collapseNotesButton').show()
-      $('#getNotesButton').show()
-    }
     $('#edit-info').hide()
     // $('#collapseNotesButton').show()
     // if ($('.all-notes').val() !== '') {
@@ -93,30 +89,51 @@ const getNotesSuccess = (data) => {
     clearTable()
     $('.all-notes').append(showNotesHtml)
     $('.edit-note').on('click', onEditNote)
-    $('.remove').on('click', function () {
-      const noteId = $(this).parent().parent().attr('data-id')
-      // console.log(noteId)
-      $(this).parent().parent().remove()
-      api.removeNotes(data, noteId)
-        .then(events.checkGet)
+    $('.remove').on('click', onRemoveNote)
+    // const noteId = $(this).parent().parent().attr('data-id')
+    // // console.log(noteId)
+    // $(this).parent().parent().remove()
+    // api.removeNotes(data, noteId)
+    //   .then(events.checkGet)
+
     // $('#clearNotesButton').on('click', function () {
     //   const noteId = $(this).parent().parent().data('id')
     //   console.log(noteId)
     //   $(this).parent().parent().remove()
     //   api.removeAllNotes(data)
-    })
   } else {
-    getNoteFailure()
-  }
-  if (data.notes.length === 0) {
     $('#collapseNotesButton').hide()
-  } else {
-    $('#collapseNotesButton').show()
+    $('#getNotesButton').hide()
+    $('.note-listing').hide()
   }
 }
+// if (data.notes.length === 0) {
+//   $('#collapseNotesButton').hide()
+//   $('#getNotesButton').hide()
+// } else {
+//   $('#collapseNotesButton').show()
+//   $('#getNotesButton').show()
+// }
 // $(edit-info).on('click', function (event) {
 // $(comment)
-//})
+// })
+
+const onRemoveNote = function () {
+  const noteId = $(this).parent().parent().attr('data-id')
+  console.log(noteId)
+  // console.log(noteId)
+  $(this).parent().parent().remove()
+  api.removeNotes(noteId)
+    .then(removeNoteSuccess)
+    .catch(failure)
+}
+
+const removeNoteSuccess = function () {
+  $('#message').text('Deleted note!').fadeIn().delay(4000).fadeOut()
+  api.getNotes()
+    .then(getNotesSuccess)
+    .catch(removeNoteFailure)
+}
 
 const onEditNote = function () {
   // const data = getFormFields(this)
@@ -245,6 +262,10 @@ const createNoteFailure = function (data) {
 const getNoteFailure = function (data) {
   // console.log(data)
   $('#message').text('Got nothin, make a note!').fadeIn().delay(4000).fadeOut()
+}
+const removeNoteFailure = function (data) {
+  // console.log(data)
+  $('#message').text('Deleted note fail!').fadeIn().delay(4000).fadeOut()
 }
 
 // if (data.notes.length === 0) {

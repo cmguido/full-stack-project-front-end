@@ -55,14 +55,13 @@ const getNotes = function () {
     }
   })
 }
-const removeNotes = function (data, noteId) {
+const removeNotes = function (noteId) {
   return $.ajax({
     url: config.apiOrigin + '/notes/' + noteId,
     method: 'DELETE',
     headers: {
       Authorization: 'Token token=' + store.user.token
-    },
-    data
+    }
   })
 }
 // const removeAllNotes = function (data) {
