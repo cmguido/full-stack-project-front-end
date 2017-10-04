@@ -27,10 +27,20 @@ const signInSuccess = function (data) {
   $('.main').show()
   $('#note').show()
   $('#content').show()
-  $('#getNotesButton').show()
+  // $('#getNotesButton').show()
   $('.note-listing').show()
   $('#wrapper').show()
   $('.all-notes').html('')
+  // $('#sign-in').on('click', function (data) {
+  //   data = data.notes
+  //   if (data.notes.length !== 0) {
+  //     $('#collapseNotesButton').show()
+  //     $('#getNotesButton').show()
+  //   } else {
+  //     $('#collapseNotesButton').hide()
+  //     $('#getNotesButton').hide()
+  //   }
+  // })
 }
 const changePasswordSuccess = function (data) {
   // console.log('Great success!')
@@ -59,7 +69,7 @@ const signOutSuccess = function () {
 const getNotesSuccess = (data) => {
   if (data.notes !== '') {
     // console.log('data notes is ' + data.notes.length)
-    $('#message').text('Got em!').fadeIn().delay(8000).fadeOut()
+    // $('#message').text('Got em!').fadeIn().delay(8000).fadeOut()
     const showNotesHtml = showNotesTemplate({ notes: data.notes })
     $('.notes-table').show()
     // if ($('.all-notes').val() === '') {
@@ -67,8 +77,10 @@ const getNotesSuccess = (data) => {
     // }
     if (data.notes.length === 0) {
       $('#collapseNotesButton').hide()
+      $('#getNotesButton').hide()
     } else {
       $('#collapseNotesButton').show()
+      $('#getNotesButton').show()
     }
     // $('#collapseNotesButton').show()
     // if ($('.all-notes').val() !== '') {
@@ -178,6 +190,8 @@ const createNoteSuccess = function (data) {
   // console.log('Note created!')
   $('#message').text('You created a new note!').fadeIn().delay(4000).fadeOut()
   $('#note').trigger('reset')
+  api.getNotes()
+    .then(getNotesSuccess)
   // store.notes = data.notes
 }
 const editNoteSuccess = function (data) {
@@ -221,14 +235,14 @@ const getNoteFailure = function (data) {
   // console.log(data)
   $('#message').text('Got nothin, make a note!').fadeIn().delay(4000).fadeOut()
 }
-const checkGet = function (data) {
-  if (data.notes.length === 0) {
-    $('#getNotesButton').hide()
-    $('#message').text('Got nothin, make a note!').fadeIn().delay(4000).fadeOut()
-  } else {
-    $('#getNotesButton').show()
-  }
-}
+
+// if (data.notes.length === 0) {
+//   $('#getNotesButton').hide()
+//   $('.notes-table').hide()
+//   $('#message').text('Got nothin, make a note!').fadeIn().delay(4000).fadeOut()
+// } else {
+//   $('#getNotesButton').show()
+// }
 module.exports = {
   signUpSuccess,
   signUpFailure,
@@ -245,6 +259,5 @@ module.exports = {
   failure,
   editNoteSuccess,
   onNoteEdit,
-  collapseTable,
-  checkGet
+  collapseTable
 }

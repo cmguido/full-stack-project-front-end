@@ -16,6 +16,8 @@ const onSignIn = function (event) {
   event.preventDefault()
   api.signIn(data)
     .then(ui.signInSuccess)
+    .then(api.getNotes)
+    .then(checkGet)
     .catch(ui.signInFailure)
 }
 const onChangePassword = function (event) {
@@ -58,7 +60,15 @@ const onCollapse = function (event) {
   event.preventDefault()
   ui.collapseTable()
 }
-
+const checkGet = function (data) {
+  if (data.notes.length === 0) {
+    $('#collapseNotesButton').hide()
+    $('#getNotesButton').hide()
+  } else {
+    $('#collapseNotesButton').show()
+    $('#getNotesButton').show()
+  }
+}
 const addHandlers = function () {
   $('#collapseNotesButton').hide()
   $('#sign-out').hide()
@@ -76,6 +86,8 @@ const addHandlers = function () {
   $('#note').on('submit', onCreateNote)
   $('#getNotesButton').on('click', onGetNotes)
   $('#collapseNotesButton').on('click', onCollapse)
+  // $('#sign-in').on('submit', onGetNotes)
+  // $('#sign-in').on('submit', checkGet)
 }
 
 module.exports = {
