@@ -1,6 +1,7 @@
 const store = require('../store')
 const api = require('./api')
 const showNotesTemplate = require('../templates/note-listing.handlebars')
+const events = require('./events')
 // const getFormFields = require('../../../lib/get-form-fields')
 
 const signUpSuccess = function (data) {
@@ -82,6 +83,7 @@ const getNotesSuccess = (data) => {
       $('#collapseNotesButton').show()
       $('#getNotesButton').show()
     }
+    $('#edit-info').hide()
     // $('#collapseNotesButton').show()
     // if ($('.all-notes').val() !== '') {
     //   $('#collapseNotesButton').show()
@@ -96,6 +98,7 @@ const getNotesSuccess = (data) => {
       // console.log(noteId)
       $(this).parent().parent().remove()
       api.removeNotes(data, noteId)
+        .then(events.checkGet)
     // $('#clearNotesButton').on('click', function () {
     //   const noteId = $(this).parent().parent().data('id')
     //   console.log(noteId)
@@ -111,6 +114,10 @@ const getNotesSuccess = (data) => {
     $('#collapseNotesButton').show()
   }
 }
+// $(edit-info).on('click', function (event) {
+// $(comment)
+//})
+
 const onEditNote = function () {
   // const data = getFormFields(this)
   event.preventDefault()
@@ -120,6 +127,8 @@ const onEditNote = function () {
   const time = $(this).parent().siblings()[1]
   comment.contentEditable = true
   time.contentEditable = true
+  $(comment).css({'background': 'white', 'box-shadow': 'inset 0px 0px 3px 3px green'})
+  $(time).css({'background': 'white', 'box-shadow': 'inset 0px 0px 3px 3px green'})
   $('.remove').hide()
   $(this).parent().append('<button class="edit-note">Confirm Edit</button>')
   $(this).parent().append('<button class="edit-cancel">Cancel Edit</button>')
@@ -149,6 +158,7 @@ const onEditNote = function () {
     $(this).parent().parent().append()
     if ($('.all-notes').val() === 0) {
       $('#collapseNotesButton').hide()
+      $('#edit-info').hide()
     }
   })
 }
@@ -160,6 +170,7 @@ const clearTable = function () {
 const collapseTable = function () {
   clearTable()
   $('#collapseNotesButton').hide()
+  $('#edit-info').hide()
 }
 // const checkIfEmpty = function (data) {
 //   if (data.notes.length === 0) {
