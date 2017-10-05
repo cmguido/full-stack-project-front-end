@@ -118,7 +118,7 @@ const getNotesSuccess = (data) => {
 // $(comment)
 // })
 
-const onRemoveNote = function () {
+const onRemoveNote = function (e) {
   const noteId = $(this).parent().parent().attr('data-id')
   console.log(noteId)
   // console.log(noteId)
@@ -128,14 +128,14 @@ const onRemoveNote = function () {
     .catch(failure)
 }
 
-const removeNoteSuccess = function () {
+const removeNoteSuccess = function (event) {
   $('#message').text('Deleted note!').fadeIn().delay(4000).fadeOut()
   api.getNotes()
     .then(getNotesSuccess)
     .catch(removeNoteFailure)
 }
 
-const onEditNote = function () {
+const onEditNote = function (event) {
   // const data = getFormFields(this)
   event.preventDefault()
   $('#edit-info').show()
@@ -151,7 +151,7 @@ const onEditNote = function () {
   $(this).parent().append('<button class="edit-cancel">Cancel Edit</button>')
   $(this).hide()
   $(this).hide()
-  $('.edit-cancel').on('click', function () {
+  $('.edit-cancel').on('click', function (event) {
     $('#edit-info').hide()
     // clearTable()
     $(this).parent().parent().append()
