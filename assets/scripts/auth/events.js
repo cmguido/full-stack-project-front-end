@@ -62,11 +62,11 @@ const onCollapse = function (event) {
 }
 const checkGet = function (data) {
   if (data.notes.length === 0) {
-    $('#collapseNotesButton').hide()
+    // $('#collapseNotesButton').hide()
     $('#getNotesButton').hide()
     $('.note-listing').hide()
   } else {
-    $('#collapseNotesButton').show()
+    // $('#collapseNotesButton').show()
     $('#getNotesButton').show()
     $('.note-listing').show()
   }
