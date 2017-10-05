@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>Note-ify</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body class="container-fluid">
+      <h1>Note-ify</h1>
+  <div class="nav">
+    <nav>
+            <p class='message' id='message'></p>
+      <form id="sign-up">
+      <h5>Sign up!</h5>
+      <input type="text" name="credentials[email]" placeholder="Enter Email">
+      <input type="password" name="credentials[password]" placeholder="Enter Password">
+      <input type="password" name="credentials[password_confirmation]" placeholder="Confirm Password">
+      <input type="reset">
+      <input type="submit" name="submit" value="Sign up!">
+  </form>
+  <form id="sign-in">
+      <h5>Sign In!</h5>
+      <input type="text" name="credentials[email]" placeholder="Enter Email">
+      <input type="password" name="credentials[password]" placeholder="Enter Password">
+      <input type="reset">
+      <input type="submit" name="submit" value="Sign in!">
+  </form>
+      <form id="change-password">
+      <h5>Change Password</h5>
+        <input type="password" name="passwords[old]" placeholder="Enter Old Password">
+        <input type="password" name="passwords[new]" placeholder="Enter New Password">
+      <input type="submit" name="submit" value="Change Password!">
+      </form>
+        <form id="sign-out">
+            <h5>Sign Out</h5>
+            <input type="submit" name="submit" value="Sign Out!">
+        </form>
+  <!-- <form id="change-password">
+      <h3>Change Password</h3>
+        <input type="password" name="passwords[old]" placeholder="Enter Old Password">
+        <input type="password" name="passwords[new]" placeholder="Enter New Password">
+      <input type="submit" name="submit" value="Change Password!">
+
+    </form>
+    <form id="sign-out">
+        <h3>Sign Out</h3>
+        <input type="submit" name="submit" value="Sign Out!">
+    </form> -->
+</nav>
+</div>
+  <h4 class="directions">Sign up or Sign in</h4>
+<section class="main">
+<div class="note-input">
+<form id="note">
+    <h3>Note It</h3>
+    <textarea rows="1" class="comment-input" type="text" name="note[comment]" style="width:150px; height:50px;" placeholder="Note here"></textarea><br>
+    <input type="datetime" name="note[time]" style="width:150px;" placeholder="Enter time (eg: 10:10am)"> <br>
+    <input type="reset"> <br>
+    <input type="submit" name="submit" value="Note it!"> <br>
+    <!-- <button id="clearNotesButton" class="btn btn-default">Clear Notes!</button> -->
+    <!-- <button id="clearNotesButton" class="btn btn-default">Clear Notes!</button> -->
+</form>
+<br>
+</div>
+</section>
+<div id="wrapper">
+  <!-- <form id="list">
+  <input type="submit" name="get-all">
+  <input type="submit" name="get-one", placeholder="Enter note ID">
+  <input type="submit" name="submit" value="Find Note!">
+  </form> -->
+  <aside class="note-listing">
+    <button id="getNotesButton" class="btn btn-default">Get Notes!</button>
+    <button id="collapseNotesButton" class="btn btn-default">Collapse</button>
+  <table class="notes-table">
+    <thead>
+      <h6 id="edit-info">to change note, click edit and then click the field you want to change</h6>
+    <tr>
+      <th>Comment</th>
+      <th>Time</th>
+      <tbody class="all-notes">
+      </tbody>
+    </tr>
+      </thead>
+  </table>
+</aside>
+  </div>
+    </body>
+</html>
