@@ -35,7 +35,7 @@ User stories -
     user would like to enter information they can receive later.
     user would like to set up phone (text or email) notifications.
 
-Wireframe -
+Wireframe - https://imgur.com/a/bPuE8
     I'm going to have a bare bones website, just fields to enter the information
     and fields to retreive info you've previously entered. They'll vary based
     on what you want, like calling back specifics info from a list or an entire
